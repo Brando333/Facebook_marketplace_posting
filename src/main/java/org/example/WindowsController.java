@@ -2,20 +2,21 @@ package org.example;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.File;
 
 public class WindowsController {
 
+    private final String absolutePathDirectoryImages;
     private GraphicsDevice gd;
-    private final File imagesDirectory;
     private final Robot robot;
-    private final File[] subDirectories;
+
+    ProductsManager productsManager;
+
 
     public WindowsController(String path) throws AWTException {
         gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        imagesDirectory = new File(path);
         robot = new Robot(gd);
-        subDirectories = imagesDirectory.listFiles(File::isDirectory);
+        absolutePathDirectoryImages = path;
+        productsManager = new ProductsManager(path);
     }
 
     public void pickImages() {
@@ -37,45 +38,40 @@ public class WindowsController {
     private void repeatPressAndReleaseKey(int keyCode, int repeatCount) {
         for (int i = 0; i < repeatCount; i++) {
             pressAndReleaseKey(keyCode);
-            System.err.println(KeyEvent.getKeyText(keyCode) + "is presseingf");
         }
     }
 
     private void pressAndReleaseKey(int keyCode) {
-
         robot.keyPress(keyCode);
         robot.keyRelease(keyCode);
     }
 
     private void chooseProduct() {
-        System.out.println("choose product");
-        repeatPressAndReleaseKey(KeyEvent.VK_TAB, 4);
-        pressAndReleaseKey(KeyEvent.VK_ENTER);
+        putFocusOnFileBrowser();
+        String product = productsManager.getNextProductName();
+        sendKeys(product);
+    }
+
+    private void putFocusOnFileBrowser() {
+        repeatPressAndReleaseKey(KeyEvent.VK_TAB, 6);
     }
 
     private void writePathInWindowsManager() {
-        System.out.println("writePathInWindowsManager");
         getFocusInWriter();
         clear();
-        sendKeys(imagesDirectory.getAbsolutePath());
+        sendKeys(absolutePathDirectoryImages);
     }
 
     private void clear() {
-        System.out.println("clear");
         robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_SHIFT);
-        pressAndReleaseKey(KeyEvent.VK_LEFT);
-
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        robot.keyRelease(KeyEvent.VK_SHIFT);
-        pressAndReleaseKey(KeyEvent.VK_LEFT);
-
+        robot.keyPress(KeyEvent.VK_A);
         pressAndReleaseKey(KeyEvent.VK_DELETE);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyRelease(KeyEvent.VK_A);
 
     }
 
     private void getFocusInWriter() {
-        System.err.println("getFocusInWriter");
         pressAndReleaseKey(KeyEvent.VK_F4);
     }
 
@@ -83,7 +79,7 @@ public class WindowsController {
     private void sendKeys(String text) {
 
         text = text.toUpperCase();
-
+        System.err.println(text);
 
         for (char c : text.toCharArray()) {
             if (c == '\\') {
@@ -95,6 +91,7 @@ public class WindowsController {
                 robot.keyRelease(KeyEvent.VK_NUMPAD2);
             }
             if (Character.isLetter(c)) {
+                System.out.println("c = " + c);
                 pressAndReleaseKey(c);
             }
             if (c == ':') { //for semicolon
@@ -104,7 +101,6 @@ public class WindowsController {
             }
 
         }
-
         pressAndReleaseKey(KeyEvent.VK_ENTER);
 
     }

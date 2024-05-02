@@ -8,19 +8,18 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("User");
-        String user = sc.nextLine();
+        String user = User.user;
         System.out.println("password");
-        String password = sc.nextLine();
+        String password = User.pass;
         System.out.println("imagesPath");
-        String imagesPath = sc.nextLine();
+        String imagesPath = User.images;
 
         FacebookController facebookController = new FacebookController(user, password);
-        WindowsController windowsController = new WindowsController(imagesPath);
-
         facebookController.login();
         facebookController.clickMarketPlace();
-        windowsController.pickImages();
 
+        WindowsController windowsController = new WindowsController(imagesPath);
+        windowsController.pickImages();
 
 
     }

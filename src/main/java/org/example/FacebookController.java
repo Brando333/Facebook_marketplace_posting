@@ -48,7 +48,7 @@ public class FacebookController {
         driver.findElement(By.partialLinkText("Create new listing")).click();
         driver.findElement(By.partialLinkText("Item for sale")).click();
 
-        Thread.sleep(6000);
+        Thread.sleep(3000);
         WebElement addPhotosButton = getAddPhotosButton();
         addPhotosButton.click();
     }
