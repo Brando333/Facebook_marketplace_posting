@@ -22,7 +22,7 @@ public class WindowsController {
     public void pickImages() {
         writePathInWindowsManager();
         chooseProduct();
-        selectImages();
+//        selectImages();
     }
 
     private void selectImages() {
@@ -36,8 +36,10 @@ public class WindowsController {
     }
 
     private void repeatPressAndReleaseKey(int keyCode, int repeatCount) {
+        System.err.println("===============");
         for (int i = 0; i < repeatCount; i++) {
             pressAndReleaseKey(keyCode);
+            System.out.println(KeyEvent.getKeyText(keyCode));
         }
     }
 
@@ -47,13 +49,16 @@ public class WindowsController {
     }
 
     private void chooseProduct() {
+        robot.delay(1000);
         putFocusOnFileBrowser();
         String product = productsManager.getNextProductName();
         sendKeys(product);
     }
 
     private void putFocusOnFileBrowser() {
+
         repeatPressAndReleaseKey(KeyEvent.VK_TAB, 6);
+
     }
 
     private void writePathInWindowsManager() {
@@ -79,7 +84,7 @@ public class WindowsController {
     private void sendKeys(String text) {
 
         text = text.toUpperCase();
-        System.err.println(text);
+
 
         for (char c : text.toCharArray()) {
             if (c == '\\') {
@@ -91,7 +96,7 @@ public class WindowsController {
                 robot.keyRelease(KeyEvent.VK_NUMPAD2);
             }
             if (Character.isLetter(c)) {
-                System.out.println("c = " + c);
+
                 pressAndReleaseKey(c);
             }
             if (c == ':') { //for semicolon
