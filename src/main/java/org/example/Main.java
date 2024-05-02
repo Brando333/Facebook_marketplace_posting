@@ -1,12 +1,27 @@
 package org.example;
 
 import java.awt.*;
+import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) throws InterruptedException, AWTException {
-        new FacebookController();
-        new WindowsController();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("User");
+        String user = sc.nextLine();
+        System.out.println("password");
+        String password = sc.nextLine();
+        System.out.println("imagesPath");
+        String imagesPath = sc.nextLine();
+
+        FacebookController facebookController = new FacebookController(user, password);
+        WindowsController windowsController = new WindowsController(imagesPath);
+
+        facebookController.login();
+        facebookController.clickMarketPlace();
+        windowsController.pickImages();
+
+
+
     }
 }

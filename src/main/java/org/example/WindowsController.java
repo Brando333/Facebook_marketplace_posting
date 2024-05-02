@@ -6,51 +6,79 @@ import java.io.File;
 
 public class WindowsController {
 
-    GraphicsDevice gd;
-    File imagesDirectory;
-    Robot robot;
+    private GraphicsDevice gd;
+    private final File imagesDirectory;
+    private final Robot robot;
+    private final File[] subDirectories;
 
-    public WindowsController() throws AWTException {
+    public WindowsController(String path) throws AWTException {
         gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        imagesDirectory = new File("C:\\images");
+        imagesDirectory = new File(path);
         robot = new Robot(gd);
-
-        writePathInWindowsManager(KeyEvent.VK_F4);
-        init();
+        subDirectories = imagesDirectory.listFiles(File::isDirectory);
     }
 
-    private void writePathInWindowsManager(int vkF4) {
-        getFocusInWriter(vkF4);
+    public void pickImages() {
+        writePathInWindowsManager();
+        chooseProduct();
+        selectImages();
+    }
+
+    private void selectImages() {
+        pressAndReleaseKey(KeyEvent.VK_DOWN);
+        pressAndReleaseKey(KeyEvent.VK_UP);
+        robot.keyPress(KeyEvent.VK_SHIFT);
+        repeatPressAndReleaseKey(KeyEvent.VK_LEFT, 4);
+        robot.keyRelease(KeyEvent.VK_SHIFT);
+        pressAndReleaseKey(KeyEvent.VK_ENTER);
+
+    }
+
+    private void repeatPressAndReleaseKey(int keyCode, int repeatCount) {
+        for (int i = 0; i < repeatCount; i++) {
+            pressAndReleaseKey(keyCode);
+            System.err.println(KeyEvent.getKeyText(keyCode) + "is presseingf");
+        }
+    }
+
+    private void pressAndReleaseKey(int keyCode) {
+
+        robot.keyPress(keyCode);
+        robot.keyRelease(keyCode);
+    }
+
+    private void chooseProduct() {
+        System.out.println("choose product");
+        repeatPressAndReleaseKey(KeyEvent.VK_TAB, 4);
+        pressAndReleaseKey(KeyEvent.VK_ENTER);
+    }
+
+    private void writePathInWindowsManager() {
+        System.out.println("writePathInWindowsManager");
+        getFocusInWriter();
         clear();
         sendKeys(imagesDirectory.getAbsolutePath());
-
     }
 
     private void clear() {
+        System.out.println("clear");
         robot.keyPress(KeyEvent.VK_CONTROL);
         robot.keyPress(KeyEvent.VK_SHIFT);
-        robot.keyPress(KeyEvent.VK_LEFT);
-        robot.keyPress(KeyEvent.VK_LEFT);
+        pressAndReleaseKey(KeyEvent.VK_LEFT);
 
         robot.keyRelease(KeyEvent.VK_CONTROL);
         robot.keyRelease(KeyEvent.VK_SHIFT);
-        robot.keyRelease(KeyEvent.VK_LEFT);
-        robot.keyRelease(KeyEvent.VK_LEFT);
+        pressAndReleaseKey(KeyEvent.VK_LEFT);
 
-        robot.keyPress(KeyEvent.VK_DELETE);
-        robot.keyRelease(KeyEvent.VK_DELETE);
+        pressAndReleaseKey(KeyEvent.VK_DELETE);
 
     }
 
-    private void getFocusInWriter(int vkF4) {
-        robot.keyPress(vkF4);
-        robot.keyRelease(vkF4);
+    private void getFocusInWriter() {
+        System.err.println("getFocusInWriter");
+        pressAndReleaseKey(KeyEvent.VK_F4);
     }
 
-    public void init() {
-        File[] subDirectories = imagesDirectory.listFiles(File::isDirectory);
-
-    }
 
     private void sendKeys(String text) {
 
@@ -58,7 +86,6 @@ public class WindowsController {
 
 
         for (char c : text.toCharArray()) {
-            System.out.println("c = " + c);
             if (c == '\\') {
                 robot.keyPress(KeyEvent.VK_ALT);
                 robot.keyPress(KeyEvent.VK_NUMPAD9);
@@ -68,20 +95,17 @@ public class WindowsController {
                 robot.keyRelease(KeyEvent.VK_NUMPAD2);
             }
             if (Character.isLetter(c)) {
-                robot.keyPress(c);
-                robot.keyRelease(c);
+                pressAndReleaseKey(c);
             }
             if (c == ':') { //for semicolon
                 robot.keyPress(KeyEvent.VK_SHIFT);
-                robot.keyPress(KeyEvent.VK_PERIOD);
-                robot.keyRelease(KeyEvent.VK_PERIOD);
+                pressAndReleaseKey(KeyEvent.VK_PERIOD);
                 robot.keyRelease(KeyEvent.VK_SHIFT);
             }
 
         }
 
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
+        pressAndReleaseKey(KeyEvent.VK_ENTER);
 
     }
 

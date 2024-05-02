@@ -12,17 +12,15 @@ import java.time.Duration;
 
 public class FacebookController {
 
+    private String user;
+    private String password;
+
     private ChromeOptions options;
     private WebDriver driver;
-    Actions actions;
+    private Actions actions;
 
-    public FacebookController() throws InterruptedException {
-        init();
-        login();
-        publish();
-    }
+    public FacebookController(String user, String password) {
 
-    private void init() {
         options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
@@ -31,23 +29,28 @@ public class FacebookController {
         driver.manage().window().maximize();
         driver.get("https://www.facebook.com/");
         actions = new Actions(driver);
+
+        this.user = user;
+        this.password = password;
+
+
     }
 
-    private void login() {
-        driver.findElement(By.id("email")).sendKeys(User.email);
-        driver.findElement(By.id("pass")).sendKeys(User.password);
+
+    public void login() {
+        driver.findElement(By.id("email")).sendKeys(user);
+        driver.findElement(By.id("pass")).sendKeys(password);
         driver.findElement(By.tagName("button")).click();
     }
 
-    private void publish() throws InterruptedException {
+    public void clickMarketPlace() throws InterruptedException {
         driver.findElement(By.linkText("Marketplace")).click();
         driver.findElement(By.partialLinkText("Create new listing")).click();
         driver.findElement(By.partialLinkText("Item for sale")).click();
 
-        Thread.sleep(3000);
+        Thread.sleep(6000);
         WebElement addPhotosButton = getAddPhotosButton();
         addPhotosButton.click();
-
     }
 
     private WebElement getAddPhotosButton() {
