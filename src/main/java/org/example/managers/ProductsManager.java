@@ -1,15 +1,13 @@
-package org.example;
+package org.example.managers;
 
 import java.io.File;
-import java.io.FileFilter;
-import java.nio.file.Files;
 
 public class ProductsManager {
     private int productsQuantity;
     private File[] products;
 
 
-    public int nextProduct = 0;
+    private int nextProduct = 0;
 
 
     public ProductsManager(String path) {
@@ -17,11 +15,11 @@ public class ProductsManager {
         int productsQuantity = products.length;
     }
 
-    public String getNextProductName() {
-        return products[nextProduct++].getName();
+    public void nextProductName() {
+        nextProduct++;
     }
 
-    public String getCurrentProductImage() {
+    public String getCurrentProductName() {
         return products[nextProduct].getName();
     }
 

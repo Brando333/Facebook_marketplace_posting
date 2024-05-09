@@ -1,6 +1,7 @@
-package org.example;
+package org.example.managers;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class ImagesManager {
 
@@ -9,15 +10,22 @@ public class ImagesManager {
     private File[] imagesSet;
 
 
-
     public ImagesManager(String productPath, int imagesSetQuantity) {
         images = new File(productPath).listFiles(File::isFile);
+
         this.imagesSetQuantity = imagesSetQuantity;
+
     }
 
     public File[] getImagesSet() {
         imagesSet = new File[imagesSetQuantity];
-        System.arraycopy(images, 0, imagesSet, 0, imagesSetQuantity);
+
+
+        for (int i = 0; i < imagesSet.length; i++) {
+            imagesSet[i] = images[i];
+        }
+
+
         return imagesSet;
     }
 

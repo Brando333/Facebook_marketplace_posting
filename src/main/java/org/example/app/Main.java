@@ -1,4 +1,7 @@
-package org.example;
+package org.example.app;
+
+import org.example.controllers.FacebookController;
+import org.example.controllers.WindowsController;
 
 import java.awt.*;
 import java.util.Scanner;
@@ -20,6 +23,8 @@ public class Main {
 
         WindowsController windowsController = new WindowsController(imagesPath);
         windowsController.pickImages();
+
+        facebookController.setRequiredFieldsToPublish();
 
 
     }
