@@ -73,17 +73,46 @@ public class FacebookController {
         categoryComboBox.click();
         actions.sendKeys("\t\t\n").perform();
 
-        By conditionLocator = RelativeLocator.with(By.tagName("div")).below(categoryComboBox);
-        WebElement conditionComboBox = driver.findElement(conditionLocator);
-        conditionComboBox.click();
+        actions.sendKeys("\t").perform();
 
+        WebElement conditionComboBox = driver.switchTo().activeElement();
+        conditionComboBox.click();
         actions.sendKeys(Keys.ARROW_DOWN).sendKeys("\n").perform();
+
+
+        WebElement colorTextField = driver.findElement(
+                RelativeLocator.with(By.tagName("input")).below(conditionComboBox)
+        );
 
 
         By descriptionLocator = RelativeLocator.with(By.tagName("textarea")).below(conditionComboBox);
         WebElement descriptionTextArea = driver.findElement(descriptionLocator);
         descriptionTextArea.sendKeys("Some description");
 
+        WebElement availabilityComboBox = driver.findElement(
+                RelativeLocator.with(By.tagName("div")).below(descriptionTextArea)
+        );
+
+        WebElement productTagsTextArea = driver.findElement(
+                RelativeLocator.with(By.tagName("textarea")).below(availabilityComboBox)
+        );
+
+        WebElement SKUTextField = driver.findElement(
+                RelativeLocator.with(By.tagName("input")).below(productTagsTextArea)
+        );
+
+        WebElement locationTextField = driver.findElement(
+                RelativeLocator.with(By.tagName("input")).below(SKUTextField)
+        );
+        locationTextField.sendKeys(Keys.CONTROL, "A", Keys.DELETE);
+        //todo correct this
+        locationTextField.sendKeys("Huancayo, Peru", Keys.DOWN, Keys.ENTER);
+
+
+        WebElement publicMeetupCheckBox = driver.findElement(
+                RelativeLocator.with(By.tagName("div")).below(SKUTextField)
+        );
+        publicMeetupCheckBox.click();
 
     }
 
