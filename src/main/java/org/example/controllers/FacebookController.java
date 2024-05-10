@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.locators.RelativeLocator;
-import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 
@@ -71,13 +70,13 @@ public class FacebookController {
         By categoryLocator = RelativeLocator.with(By.tagName("div")).below(priceTextBox);
         WebElement categoryComboBox = driver.findElement(categoryLocator);
         categoryComboBox.click();
-        actions.sendKeys("\t\t\n").perform();
+        selectHouseHoldCategory();
 
-        actions.sendKeys("\t").perform();
 
+        goToConditionComboBox();
         WebElement conditionComboBox = driver.switchTo().activeElement();
         conditionComboBox.click();
-        actions.sendKeys(Keys.ARROW_DOWN).sendKeys("\n").perform();
+        selectNewOptionInComboBox();
 
 
         WebElement colorTextField = driver.findElement(
@@ -88,6 +87,7 @@ public class FacebookController {
         By descriptionLocator = RelativeLocator.with(By.tagName("textarea")).below(conditionComboBox);
         WebElement descriptionTextArea = driver.findElement(descriptionLocator);
         descriptionTextArea.sendKeys("Some description");
+
 
         WebElement availabilityComboBox = driver.findElement(
                 RelativeLocator.with(By.tagName("div")).below(descriptionTextArea)
@@ -104,16 +104,46 @@ public class FacebookController {
         WebElement locationTextField = driver.findElement(
                 RelativeLocator.with(By.tagName("input")).below(SKUTextField)
         );
-        locationTextField.sendKeys(Keys.CONTROL, "A", Keys.DELETE);
-        //todo correct this
-        locationTextField.sendKeys("Huancayo, Peru", Keys.DOWN, Keys.ENTER);
+        selectHuancayoCity(locationTextField);
 
 
-        WebElement publicMeetupCheckBox = driver.findElement(
-                RelativeLocator.with(By.tagName("div")).below(SKUTextField)
-        );
+        goToPublicMeetUpCheckBox();
+        WebElement publicMeetupCheckBox = driver.switchTo().activeElement();
         publicMeetupCheckBox.click();
 
+
+        goToButtonNext();
+        WebElement buttonNext = driver.switchTo().activeElement();
+        buttonNext.click();
+
+
+    }
+
+    private void selectNewOptionInComboBox() {
+        actions.sendKeys(Keys.ARROW_DOWN).sendKeys("\n").perform();
+    }
+
+    private void goToConditionComboBox() {
+        actions.sendKeys("\t").perform();
+    }
+
+    private void selectHouseHoldCategory() {
+        actions.sendKeys("\t\t\n").perform();
+    }
+
+    private void goToButtonNext() {
+        actions.sendKeys("\t".repeat(8)).perform();
+    }
+
+    private void goToPublicMeetUpCheckBox() {
+        actions.sendKeys("\t\t").perform();
+    }
+
+    private void selectHuancayoCity(WebElement locationTextField) throws InterruptedException {
+        locationTextField.sendKeys(Keys.CONTROL, "A", Keys.DELETE);
+        locationTextField.sendKeys("Huancayo, Peru");
+        Thread.sleep(1000);
+        actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
     }
 
     private WebElement getTitleTextBox() throws InterruptedException {

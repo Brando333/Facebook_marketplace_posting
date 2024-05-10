@@ -79,7 +79,7 @@ public class WindowsController {
     }
 
     private void getFocusInWriter() {
-        robot.delay(500);
+        robot.delay(1000);
         robotUtils.pressAndReleaseKey(KeyEvent.VK_F4);
     }
 
