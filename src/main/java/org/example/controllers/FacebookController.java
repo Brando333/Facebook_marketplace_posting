@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.locators.RelativeLocator;
 
 import java.time.Duration;
+import java.util.List;
 
 public class FacebookController {
 
@@ -146,8 +147,36 @@ public class FacebookController {
         actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
     }
 
+
+    public void publishInGroups() throws InterruptedException {
+        Thread.sleep(1000);
+
+        actions.sendKeys(Keys.TAB).perform();
+        WebElement firstFacebookGroup = driver.switchTo().activeElement();
+        firstFacebookGroup.click();
+
+        actions.sendKeys(Keys.TAB).perform();
+        WebElement nextGroup = driver.switchTo().activeElement();
+        while (!nextGroup.isSelected() && !nextGroup.getText().isBlank()) {
+            nextGroup.click();
+
+            System.out.println("nextGroup.getText() = " + nextGroup.getText());
+            System.out.println("nextGroup.getAccessibleName() = " + nextGroup.getAccessibleName());
+            System.out.println("nextGroup.getAriaRole() = " + nextGroup.getAriaRole());
+            System.out.println("nextGroup.getTagName() = " + nextGroup.getTagName());
+
+            System.out.println("=============================================================");
+
+            actions.sendKeys(Keys.TAB).perform();
+            nextGroup = driver.switchTo().activeElement();
+        }
+
+
+    }
+
+
     private WebElement getTitleTextBox() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(4000);
         actions.sendKeys("\t".repeat(10)).perform();
         return driver.switchTo().activeElement();
     }
