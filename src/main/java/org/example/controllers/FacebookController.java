@@ -7,7 +7,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.locators.RelativeLocator;
 
 import java.time.Duration;
-import java.util.List;
 
 public class FacebookController {
 
@@ -149,6 +148,7 @@ public class FacebookController {
 
 
     public void publishInGroups() throws InterruptedException {
+
         Thread.sleep(1000);
 
         actions.sendKeys(Keys.TAB).perform();
@@ -159,7 +159,7 @@ public class FacebookController {
         WebElement nextGroup = driver.switchTo().activeElement();
         while (!nextGroup.isSelected() && !nextGroup.getText().isBlank()) {
             nextGroup.click();
-
+            //todo correct this error in nextLine, was working but not now
             System.out.println("nextGroup.getText() = " + nextGroup.getText());
             System.out.println("nextGroup.getAccessibleName() = " + nextGroup.getAccessibleName());
             System.out.println("nextGroup.getAriaRole() = " + nextGroup.getAriaRole());
@@ -171,13 +171,36 @@ public class FacebookController {
             nextGroup = driver.switchTo().activeElement();
         }
 
+        skipJoinGroups();
 
+
+    }
+
+    private void skipJoinGroups() throws InterruptedException {
+        WebElement unknownElement = driver.switchTo().activeElement();
+
+        while (!unknownElement.getText().equals("Previous")) {
+            System.out.println("unknownElement.getText() = " + unknownElement.getText());
+            System.out.println("unknownElement.getAccessibleName() = " + unknownElement.getAccessibleName());
+            System.out.println("unknownElement.getAriaRole() = " + unknownElement.getAriaRole());
+            System.out.println("unknownElement.getTagName() = " + unknownElement.getTagName());
+
+            System.out.println("=============================================================");
+            actions.sendKeys(Keys.TAB).perform();
+            unknownElement = driver.switchTo().activeElement();
+
+        }
+        publish();
+    }
+
+    private void publish() {
+        actions.sendKeys(Keys.TAB).perform();
+        driver.switchTo().activeElement().click();
     }
 
 
     private WebElement getTitleTextBox() throws InterruptedException {
-        Thread.sleep(4000);
-        actions.sendKeys("\t".repeat(10)).perform();
+        actions.sendKeys("\t".repeat(5)).perform();
         return driver.switchTo().activeElement();
     }
 
