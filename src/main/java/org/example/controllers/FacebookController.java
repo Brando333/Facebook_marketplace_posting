@@ -159,14 +159,11 @@ public class FacebookController {
         WebElement nextGroup = driver.switchTo().activeElement();
         while (!nextGroup.isSelected() && !nextGroup.getText().isBlank()) {
             nextGroup.click();
-            //todo correct this error in nextLine, was working but not now
             System.out.println("nextGroup.getText() = " + nextGroup.getText());
             System.out.println("nextGroup.getAccessibleName() = " + nextGroup.getAccessibleName());
             System.out.println("nextGroup.getAriaRole() = " + nextGroup.getAriaRole());
             System.out.println("nextGroup.getTagName() = " + nextGroup.getTagName());
-
             System.out.println("=============================================================");
-
             actions.sendKeys(Keys.TAB).perform();
             nextGroup = driver.switchTo().activeElement();
         }
