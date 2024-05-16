@@ -46,15 +46,17 @@ public class FacebookController {
         driver.findElement(By.partialLinkText("Create new listing")).click();
         driver.findElement(By.partialLinkText("Item for sale")).click();
         Thread.sleep(5000);
-
         WebElement addPhotosButton = getAddPhotosButton();
         addPhotosButton.click();
-
     }
 
     private WebElement getAddPhotosButton() {
-        actions.sendKeys("\t").perform();
+        goToElement(1);
         return driver.switchTo().activeElement();
+    }
+
+    private void goToElement(int steps) {
+        actions.sendKeys("\t".repeat(steps)).perform();
     }
 
     public void setRequiredFieldsToPublish() throws InterruptedException {
@@ -124,19 +126,20 @@ public class FacebookController {
     }
 
     private void goToConditionComboBox() {
-        actions.sendKeys("\t").perform();
+        goToElement(1);
     }
 
     private void selectHouseHoldCategory() {
-        actions.sendKeys("\t\t\n").perform();
+        goToElement(2);
+        actions.sendKeys(Keys.ENTER).perform();
     }
 
     private void goToButtonNext() {
-        actions.sendKeys("\t".repeat(8)).perform();
+        goToElement(8);
     }
 
     private void goToPublicMeetUpCheckBox() {
-        actions.sendKeys("\t\t").perform();
+        goToElement(2);
     }
 
     private void selectHuancayoCity(WebElement locationTextField) throws InterruptedException {
@@ -164,7 +167,7 @@ public class FacebookController {
             System.out.println("nextGroup.getAriaRole() = " + nextGroup.getAriaRole());
             System.out.println("nextGroup.getTagName() = " + nextGroup.getTagName());
             System.out.println("=============================================================");
-            actions.sendKeys(Keys.TAB).perform();
+            goToElement(1);
             nextGroup = driver.switchTo().activeElement();
         }
 
@@ -183,7 +186,7 @@ public class FacebookController {
             System.out.println("unknownElement.getTagName() = " + unknownElement.getTagName());
 
             System.out.println("=============================================================");
-            actions.sendKeys(Keys.TAB).perform();
+            goToElement(1);
             unknownElement = driver.switchTo().activeElement();
 
         }
@@ -191,13 +194,13 @@ public class FacebookController {
     }
 
     private void publish() {
-        actions.sendKeys(Keys.TAB).perform();
+        goToElement(1);
         driver.switchTo().activeElement().click();
     }
 
 
     private WebElement getTitleTextBox() throws InterruptedException {
-        actions.sendKeys("\t".repeat(5)).perform();
+        goToElement(5);
         return driver.switchTo().activeElement();
     }
 
