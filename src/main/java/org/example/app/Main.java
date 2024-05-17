@@ -28,12 +28,17 @@ public class Main {
 
 
         ProductsManager productsManager = new ProductsManager(imagesPath);
+
         String product = productsManager.getCurrentProductName();
         String productPath = imagesPath + "\\" + product;
+
+
         ImagesManager imagesManager = new ImagesManager(productPath, 5);
         File[] images = imagesManager.getNextImagesSet();
+
         WindowsController windowsController = new WindowsController(imagesPath);
         String imagesToBeSelected = ImagesManagerUtils.getImagesStringForSelecting(images);
+
         windowsController.pickImages(productPath, imagesToBeSelected);
 
         facebookController.setRequiredFieldsToPublish();

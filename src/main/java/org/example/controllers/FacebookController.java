@@ -154,25 +154,20 @@ public class FacebookController {
 
         Thread.sleep(1000);
 
-        actions.sendKeys(Keys.TAB).perform();
-        WebElement firstFacebookGroup = driver.switchTo().activeElement();
-        firstFacebookGroup.click();
+        WebElement nextGroup;
 
-        actions.sendKeys(Keys.TAB).perform();
-        WebElement nextGroup = driver.switchTo().activeElement();
-        while (!nextGroup.isSelected() && !nextGroup.getText().isBlank()) {
+        do {
+            nextGroup = driver.switchTo().activeElement();
+            if (nextGroup.getAccessibleName().isBlank()) {
+                break;
+            }
             nextGroup.click();
-            System.out.println("nextGroup.getText() = " + nextGroup.getText());
-            System.out.println("nextGroup.getAccessibleName() = " + nextGroup.getAccessibleName());
-            System.out.println("nextGroup.getAriaRole() = " + nextGroup.getAriaRole());
-            System.out.println("nextGroup.getTagName() = " + nextGroup.getTagName());
-            System.out.println("=============================================================");
             goToElement(1);
             nextGroup = driver.switchTo().activeElement();
-        }
+
+        } while (!nextGroup.isSelected() && !nextGroup.getText().isBlank());
 
         skipJoinGroups();
-
 
     }
 
@@ -180,20 +175,14 @@ public class FacebookController {
         WebElement unknownElement = driver.switchTo().activeElement();
 
         while (!unknownElement.getText().equals("Previous")) {
-            System.out.println("unknownElement.getText() = " + unknownElement.getText());
-            System.out.println("unknownElement.getAccessibleName() = " + unknownElement.getAccessibleName());
-            System.out.println("unknownElement.getAriaRole() = " + unknownElement.getAriaRole());
-            System.out.println("unknownElement.getTagName() = " + unknownElement.getTagName());
-
-            System.out.println("=============================================================");
             goToElement(1);
             unknownElement = driver.switchTo().activeElement();
 
         }
-        publish();
+        clickPostButton();
     }
 
-    private void publish() {
+    private void clickPostButton() {
         goToElement(1);
         driver.switchTo().activeElement().click();
     }
