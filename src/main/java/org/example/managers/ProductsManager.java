@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Objects;
 
-
 /**
  * Manages the quantity of products and retrieve their names
  */

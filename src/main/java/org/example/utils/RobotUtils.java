@@ -36,22 +36,18 @@ public class RobotUtils {
                 robot.keyRelease(KeyEvent.VK_PERIOD);
                 robot.keyRelease(KeyEvent.VK_SHIFT);
             }
-
             case '(' -> {
                 robot.keyPress(KeyEvent.VK_SHIFT);
                 robot.keyPress(KeyEvent.VK_8);
                 robot.keyRelease(KeyEvent.VK_8);
                 robot.keyRelease(KeyEvent.VK_SHIFT);
             }
-
             case ')' -> {
                 robot.keyPress(KeyEvent.VK_SHIFT);
                 robot.keyPress(KeyEvent.VK_9);
                 robot.keyRelease(KeyEvent.VK_9);
                 robot.keyRelease(KeyEvent.VK_SHIFT);
             }
-
-
             case '"' -> {
                 robot.keyPress(KeyEvent.VK_SHIFT);
                 robot.keyPress(KeyEvent.VK_2);
@@ -88,5 +84,4 @@ public class RobotUtils {
             robot.delay(100);
         }
     }
-
 }

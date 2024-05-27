@@ -12,7 +12,6 @@ public class FacebookController {
 
     private final String user;
     private final String password;
-
     private final WebDriver driver;
     private final Actions actions;
 
@@ -30,8 +29,6 @@ public class FacebookController {
 
         this.user = user;
         this.password = password;
-
-
     }
 
 
@@ -117,8 +114,6 @@ public class FacebookController {
         goToButtonNext();
         WebElement buttonNext = driver.switchTo().activeElement();
         buttonNext.click();
-
-
     }
 
     private void selectNewOptionInComboBox() {
@@ -161,14 +156,25 @@ public class FacebookController {
             if (nextGroup.getAccessibleName().isBlank()) {
                 break;
             }
-            nextGroup.click();
+            if (!nextGroup.isSelected()) {
+                System.out.println("not selected: ");
+                System.out.println(nextGroup.getAccessibleName());
+                System.out.println(nextGroup.getShadowRoot());
+                System.out.println(nextGroup.getText());
+                nextGroup.click();
+            } else {
+                System.out.println("Selected: ");
+                System.out.println(nextGroup.getAccessibleName());
+                System.out.println(nextGroup.getShadowRoot());
+                System.out.println(nextGroup.getText());
+            }
+
             goToElement(1);
             nextGroup = driver.switchTo().activeElement();
 
-        } while (!nextGroup.isSelected() && !nextGroup.getText().isBlank());
+        } while (!nextGroup.getText().isBlank());
 
         skipJoinGroups();
-
     }
 
     private void skipJoinGroups() throws InterruptedException {
@@ -192,6 +198,4 @@ public class FacebookController {
         goToElement(5);
         return driver.switchTo().activeElement();
     }
-
-
 }

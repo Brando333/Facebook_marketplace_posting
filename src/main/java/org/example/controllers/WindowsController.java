@@ -47,14 +47,12 @@ public class WindowsController {
 
         robot.delay(500);
         robotUtils.repeatPressAndReleaseKey(KeyEvent.VK_TAB, 6);
-
     }
 
     private void writePathInWindowsManager() {
         getFocusInWriter();
         clear();
         robotUtils.sendKeys(absolutePathDirectoryImages);
-
     }
 
     private void clear() {
@@ -64,8 +62,6 @@ public class WindowsController {
         robotUtils.pressAndReleaseKey(KeyEvent.VK_DELETE);
         robot.keyRelease(KeyEvent.VK_CONTROL);
         robot.keyRelease(KeyEvent.VK_A);
-
-
     }
 
     private void getFocusInWriter() {

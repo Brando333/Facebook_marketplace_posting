@@ -5,7 +5,6 @@ import org.example.controllers.WindowsController;
 import org.example.managers.ImagesManager;
 import org.example.managers.ProductsManager;
 import org.example.utils.ImagesManagerUtils;
-import org.example.utils.RobotUtils;
 
 import java.awt.*;
 import java.io.File;
@@ -13,6 +12,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException, AWTException {
+
         Scanner sc = new Scanner(System.in);
 
         String user = User.user;
@@ -21,17 +21,14 @@ public class Main {
 
         //////////////////////////////////////
 
-
         FacebookController facebookController = new FacebookController(user, password);
         facebookController.login();
         facebookController.clickMarketPlace();
-
 
         ProductsManager productsManager = new ProductsManager(imagesPath);
 
         String product = productsManager.getCurrentProductName();
         String productPath = imagesPath + "\\" + product;
-
 
         ImagesManager imagesManager = new ImagesManager(productPath, 5);
         File[] images = imagesManager.getNextImagesSet();
