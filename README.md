@@ -36,5 +36,7 @@ public class User {
     public static String user = "your_username";
     public static String pass = "your_password";
     public static String productsPath = "C:\\products\\";
-}
-   
+} 
+```
+4. **Create a directory with the images**
+  - You can copy and paste the `images` folder, provided in the project, somewhere in your computer.
