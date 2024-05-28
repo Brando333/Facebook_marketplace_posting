@@ -13,10 +13,11 @@ This project aims to automate the posting of products on Facebook Marketplace by
 
 ## Setup Instructions
 
+
 1. **Clone the Repository**
    ```sh
-   git clone https://github.com/YourUsername/YourRepository.git
-   cd YourRepository
+   git clone https://github.com/Brando333/Facebook_marketplace_posting.git
+   cd Facebook_marketplace_posting
 
  2. **Set Keyboard Layout to Spanish - QWERTY**
 
