@@ -15,9 +15,7 @@ public class FacebookController {
     private final WebDriver driver;
     private final Actions actions;
 
-
     public FacebookController(String user, String password) {
-
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);

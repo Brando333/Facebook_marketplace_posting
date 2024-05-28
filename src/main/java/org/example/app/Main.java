@@ -13,11 +13,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws InterruptedException, AWTException {
 
-        Scanner sc = new Scanner(System.in);
-
-        String user = User.user;
+         String user = User.user;
         String password = User.pass;
-        String imagesPath = User.images;
+        String imagesPath = User.productsPath;
 
         //////////////////////////////////////
 
