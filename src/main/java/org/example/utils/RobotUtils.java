@@ -81,7 +81,7 @@ public class RobotUtils {
     public void repeatPressAndReleaseKey(int keyCode, int repeatCount) {
         for (int i = 0; i < repeatCount; i++) {
             pressAndReleaseKey(keyCode);
-            robot.delay(100);
+            robot.delay(300);
         }
     }
 }
