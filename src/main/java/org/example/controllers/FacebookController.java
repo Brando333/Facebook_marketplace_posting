@@ -155,24 +155,15 @@ public class FacebookController {
                 break;
             }
             if (!nextGroup.isSelected()) {
-                System.out.println("not selected: ");
-                System.out.println(nextGroup.getAccessibleName());
-                System.out.println(nextGroup.getShadowRoot());
-                System.out.println(nextGroup.getText());
                 nextGroup.click();
-            } else {
-                System.out.println("Selected: ");
-                System.out.println(nextGroup.getAccessibleName());
-                System.out.println(nextGroup.getShadowRoot());
-                System.out.println(nextGroup.getText());
             }
-
             goToElement(1);
             nextGroup = driver.switchTo().activeElement();
 
         } while (!nextGroup.getText().isBlank());
 
         skipJoinGroups();
+        clickPostButton();
     }
 
     private void skipJoinGroups() throws InterruptedException {
@@ -181,9 +172,8 @@ public class FacebookController {
         while (!unknownElement.getText().equals("Previous")) {
             goToElement(1);
             unknownElement = driver.switchTo().activeElement();
-
         }
-        clickPostButton();
+
     }
 
     private void clickPostButton() {
