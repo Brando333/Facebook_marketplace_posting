@@ -101,7 +101,7 @@ public class FacebookController {
         WebElement locationTextField = driver.findElement(
                 RelativeLocator.with(By.tagName("input")).below(SKUTextField)
         );
-        selectHuancayoCity(locationTextField);
+        selectCity(locationTextField, "Huancayo, Peru");
 
 
         goToPublicMeetUpCheckBox();
@@ -135,9 +135,9 @@ public class FacebookController {
         goToElement(2);
     }
 
-    private void selectHuancayoCity(WebElement locationTextField) throws InterruptedException {
+    private void selectCity(WebElement locationTextField, String city) throws InterruptedException {
         locationTextField.sendKeys(Keys.CONTROL, "A", Keys.DELETE);
-        locationTextField.sendKeys("Huancayo, Peru");
+        locationTextField.sendKeys(city);
         Thread.sleep(1000);
         actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
     }
