@@ -1,5 +1,7 @@
 package org.example.managers;
 
+import org.example.app.User;
+
 import java.io.File;
 
 public class ImagesManager {
@@ -7,12 +9,16 @@ public class ImagesManager {
     private final int imagesSetQuantity;
     private final File[] images;
     private File[] imagesSet;
-
     private int index = 0;
+    private ProductsManager productsManager;
 
-    public ImagesManager(String productPath, int imagesSetQuantity) {
-        images = new File(productPath).listFiles(File::isFile);
+
+    public ImagesManager(ProductsManager productsManager, int imagesSetQuantity) {
+        String product = productsManager.getCurrentProductName();
+        String imagesPath = User.productsPath + "\\" + product;
+        images = new File(imagesPath).listFiles(File::isFile);
         this.imagesSetQuantity = imagesSetQuantity;
+        this.productsManager = productsManager;
     }
 
     public File[] getNextImagesSet() {
@@ -25,5 +31,9 @@ public class ImagesManager {
         return imagesSet;
     }
 
+
+    public String getCurrentProduct() {
+        return productsManager.getCurrentProductName();
+    }
 
 }

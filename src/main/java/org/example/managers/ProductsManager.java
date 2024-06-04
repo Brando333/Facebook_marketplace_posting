@@ -21,7 +21,7 @@ public class ProductsManager {
         return Arrays.stream(products).map(File::getName).toArray(String[]::new);
     }
 
-    public void nextProductName() {
+    public void iterateNextProductName() {
         nextProduct++;
     }
 
