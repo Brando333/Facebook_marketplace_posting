@@ -11,7 +11,7 @@ This project aims to automate the posting of products on Facebook Marketplace by
 - **Keyboard Layout**: Spanish - QWERTY
   - The keyboard layout must be set to Spanish - QWERTY for writing certain characters in the image file path, such as ( :, \\ ) in `C:\\images`.
 - **Facebook Language**: English (US)
-  - The facebook display language must be set to English (US) since the system uses Facebook some text displays to find certain web elements.
+  - The facebook display language must be set to English (US) since the system uses some Facebook text displays to find certain web elements.
 
 
 ## Setup Instructions
