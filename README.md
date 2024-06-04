@@ -10,6 +10,9 @@ This project aims to automate the posting of products on Facebook Marketplace by
   - The system uses features specific to the Windows file management system.
 - **Keyboard Layout**: Spanish - QWERTY
   - The keyboard layout must be set to Spanish - QWERTY for writing certain characters in the image file path, such as ( :, \\ ) in `C:\\images`.
+- **Facebook Language**: English (US)
+  - The facebook display language must be set to English (US) since the system uses Facebook some text displays to find certain web elements.
+
 
 ## Setup Instructions
 
@@ -25,7 +28,13 @@ This project aims to automate the posting of products on Facebook Marketplace by
   - `Settings` > `Time & Language` > `Language` > `Preferred languages`
   - Add or select `Spanish (Spain)` with the QWERTY layout.
 
-3. **Configure Facebook Credentials and Product File Path**
+3. **Configure Facebook Language**
+
+- This may vary depending on the device you open Facebook.
+  - This link teachs you how to change your facebook display language depending on your device: [Facebook help](https://www.facebook.com/help/979397368770507?cms_platform=www&helpref=platform_switcher)
+  
+
+4. **Configure Facebook Credentials and Product File Path**
 
 - Open the `User` class in the `app` package and set your Facebook username, password, and the product file path.
 
